@@ -1,13 +1,4 @@
+
 function solution(my_string) {
-    let answer = '';
-    let big= my_string.toUpperCase()
-    for(let i = 0 ; i < my_string.length;i++){
-        if(my_string[i]===big[i]){
-            answer+=big[i].toLowerCase()
-        }else{
-            answer+=big[i]
-        }
-        
-    }
-    return answer;
+    return my_string.split("").map((v, index) => my_string.charCodeAt(index) < 97 ? v.toLowerCase() : v.toUpperCase()).join("");
 }
