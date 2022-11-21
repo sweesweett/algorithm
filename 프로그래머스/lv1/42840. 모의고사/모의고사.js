@@ -7,39 +7,25 @@ function solution(answers) {
     
     
     for(let i =0 ; i<answers.length;i++){
-        if(aa[i]===undefined){
             if(aa[i%5]===answers[i]){
                 obj[1]+=1
             }
-        }else{
-            if(aa[i]===answers[i]){
-                obj[1]+=1
-            }
-            
-            
-        }
-         if(bb[i]===undefined){
+       
+     
             if(bb[i%8]===answers[i]){
                 obj[2]+=1
             }
-        }else{
-            if(bb[i]===answers[i]){
-                obj[2]+=1
-            }
+      
             
-            
-        }
-         if(cc[i]===undefined){
+        
+       
+         
             if(cc[i%10]===answers[i]){
                 obj[3]+=1
             }
-        }else{
-            if(cc[i]===answers[i]){
-                obj[3]+=1
-            }
+       
             
-            
-        }
+ 
     }
     let max = Math.max(...Object.values(obj))
     for (let key in obj){
