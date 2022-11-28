@@ -1,52 +1,35 @@
 function solution(board, moves) {
     var answer = 0;
     let stack=[]
-    let empty=[]
-    for(let i=0;i<moves.length;i++){
-        let j=0
-         if(empty.includes(moves[i])){
-                continue
-            }
-        if(stack.length>1&&stack[stack.length-1]===stack[stack.lenth-2]){
-            stack.splice(stack.length-2,2)
+let dd = board.map((_,idx)=>{
+    let cc=[]
+    for(let i=0;i<board.length;i++){
+        if(board[i][idx]!==0){
+             cc.push(board[i][idx])
         }
-        while(true){
-            if(board[j][moves[i]-1]!==0){
-                if(stack[0]!==undefined&&stack[stack.length-1]===board[j][moves[i]-1]){
-                    stack.pop()
-                    answer+=2
-                }else{
-                    stack.push(board[j][moves[i]-1])
-                }
-                board[j][moves[i]-1]=0
-                break
-            }else{
-                if(j===board.length-1){
-                    empty.push(moves[i])
-                    break
-                }
-                j++
-                
-            }
-        }
-        
+       
     }
-//     let p=0
-//     while(true){
-//         if(p===stack.length-1){
-//             return answer
-//         }
-//         if(stack[p]===stack[p+1]){
-//             stack.splice(p,2)
-//             answer+=2
-//             p=0
-//         }else{
-//             p++
-//         } 
-        
-//     }
+    return cc
     
+})
+for(let i =0;i<moves.length;i++){
+    if(dd[moves[i]-1].length>0){
+        if(stack[stack.length-1]===dd[moves[i]-1][0]){
+            answer+=2
+            stack.pop()
+        }else{
+            stack.push(dd[moves[i]-1][0])
+        }
+        
+       dd[moves[i]-1].splice(0,1)
+        
+    }else{
+        continue
+    }
+    
+}
     
     return answer
     
 }
+//다시푼것
