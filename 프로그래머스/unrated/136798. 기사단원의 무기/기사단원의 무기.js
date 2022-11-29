@@ -1,18 +1,11 @@
 function solution(number, limit, power) {
-    var answer = [1]
+    var answer = 1
     for(let i =2;i<=number;i++){
-        answer.push(dd(i))
+        answer+=dd(i,limit,power)
     }
-    return answer.reduce((a,b)=>{
-        if(b>limit){
-            return a+power
-        }else{
-            return a+b
-        }
-        
-    },0)
+    return answer
 }
-function dd(num){
+function dd(num,limit,power){
     let answer=0
     for(let i =1;i<=num**0.5;i++){
         if(i===num**0.5){
@@ -22,5 +15,5 @@ function dd(num){
             answer+=2
         }
     }
-    return answer
+    return answer>limit?power:answer
 }
