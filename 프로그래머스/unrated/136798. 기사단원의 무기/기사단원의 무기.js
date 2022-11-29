@@ -3,8 +3,6 @@ function solution(number, limit, power) {
     for(let i =2;i<=number;i++){
         answer.push(dd(i))
     }
-    
-    console.log(answer)
     return answer.reduce((a,b)=>{
         if(b>limit){
             return a+power
