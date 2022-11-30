@@ -1,24 +1,27 @@
 function solution(s){
     var answer = true;
     let newS=s
-    let p=0
-    if(s.length%2){
-        return false
-    }
-    if(s[0]===')'||s[s.length-1]==='('){
-        return false
-    }
-    for(let i =0;i<s.length;i++){
-        if(s[i]==='('){
-            p+=1
-        }else{
-            p-=1
+    let dd=''
+    let i=0
+    while(true){
+        if(newS.length===0){
+            return true
         }
-        if(p<0)return false
-    }
-    if(p>0){
-        return false
+       if(newS[i]+newS[i+1]==='()'){
+               i++
+           }
+        else{
+               dd+=newS[i]+newS[i+1]
+            i+=2
+           }
+        if(i>=newS.length){
+            i=0
+        }
+        if(dd.length===newS.length){
+            return false
+        }
+        newS=dd
     }
 
-    return answer
+    return answer;
 }
