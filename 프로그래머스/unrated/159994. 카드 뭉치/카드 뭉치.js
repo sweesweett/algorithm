@@ -12,7 +12,7 @@ for(let i =goal.length-1;i>=0;i--){
         cards1.pop()
     }
      else if(isFirst[1]&&goal.indexOf(cards2[cards2.length-1])===-1){
-        cards1.pop()
+        cards2.pop()
     }
     else{
         return 'No'
