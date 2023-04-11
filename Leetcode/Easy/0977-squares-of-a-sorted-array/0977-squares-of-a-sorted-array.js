@@ -4,8 +4,7 @@
  */
 var sortedSquares = function(nums) {
     const arr= nums.map(el=>Math.pow(el,2))
-    let left=0
-    let right=1
+    let [left,right]=[0,1]
     let isSorted=true
     while(true){
         if(right===arr.length&&!isSorted){
