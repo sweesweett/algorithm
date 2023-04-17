@@ -9,8 +9,6 @@ var isAlienSorted = function(words, order) {
       map[order[i]]=i
   }
   let count=0
-  let count2=0
-  
   while(true){
       let isSorted=true
     for(let i =0;i<words.length-1;i++){
