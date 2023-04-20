@@ -7,14 +7,14 @@
  */
 var floodFill = function(image, sr, sc, color) {
     let start=image[sr][sc]
+    if(start===color){
+        return image
+    }
   const dfs=(x,y)=>{
       if(x<0||x>=image.length||y<0||y>=image[0].length){
           return;
       }
       if(image[x][y]===start){
-          if(image[x][y]===color){
-              return;
-          }
           image[x][y]=color
       }else{
           return;
