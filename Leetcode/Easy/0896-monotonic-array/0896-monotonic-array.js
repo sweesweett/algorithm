@@ -3,30 +3,23 @@
  * @return {boolean}
  */
 var isMonotonic = function(nums) {
-    let dd=[0]
+    let tt=[true,true]
     for(let i =0;i<nums.length-1;i++){
         let pp=nums[i+1]-nums[i]
-        let qq=dd[dd.length-1]
-      if(qq>0){
-          if(pp<0){
-              return false
-          }
-
-      }else if(qq<0){
-          if(pp>0){
-              return false
-          }
-
-      }
-     dd.push(pp)
+        if(pp<0){
+            tt[0]=false
+            break
+        }
         
     }
-
-    if(dd.filter(el=>el>=0).length===nums.length){
-        return true
+    for(let i =0;i<nums.length-1;i++){
+        let pp=nums[i+1]-nums[i]
+        if(pp>0){
+            tt[1]=false
+            break
+        }
+     
+        
     }
-    if(dd.filter(el=>el<=0).length===nums.length){
-        return true
-    }
-    return false
+    return tt[0]||tt[1]
 };
