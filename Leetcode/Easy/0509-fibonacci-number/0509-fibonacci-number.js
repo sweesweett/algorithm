@@ -4,8 +4,20 @@
  */
 var fib = function(n) {
     arr=[0,1]
-    for(let i =2;i<=n;i++){
-        arr.push(arr[i-2]+arr[i-1])
-    }
-    return arr[n]
+   function dfs(n){
+       if(n===0){
+           return 0
+       }
+       if(n===1){
+           return 1
+       }
+       if(arr[n]!==undefined){
+           return arr[n]
+       }else{
+           arr[n]=dfs(n-1)+dfs(n-2)
+           return arr[n]
+       }
+       
+   }
+    return dfs(n)
 };
