@@ -7,25 +7,16 @@ var isAnagram = function(s, t) {
     if(s.length!==t.length){
         return false
     }
-    let obj={}
-    for(let el of s){
-        if(obj[el]){
-            obj[el]+=1
-        }else{
-            obj[el]=1
-        }
-        
-        
+    let arr= Array(26).fill(0)
+    for(let i =0;i<s.length;i++){
+        arr[s[i].charCodeAt(0)-97]+=1
+        arr[t[i].charCodeAt(0)-97]-=1
     }
-    for(let el of t){
-        if(obj[el]){
-            obj[el]-=1
-        }else{
+      for(let i =0;i<arr.length;i++){
+        if(arr[i]!==0){
             return false
         }
-        
-        
-        
     }
+
     return true
 };
