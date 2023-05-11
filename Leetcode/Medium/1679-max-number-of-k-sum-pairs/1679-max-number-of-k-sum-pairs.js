@@ -4,24 +4,24 @@
  * @return {number}
  */
 var maxOperations = function(nums, k) {
-    nums.sort((a,b)=>a-b)
-    let left=0
-    let right=nums.length-1
+    // nums.sort((a,b)=>a-b)
+    let obj={}
     let count=0
-    while(left<right){
-        if(nums[left]+nums[right]===k){
-            left++
-            right--
-            count++
-        }else if(nums[left]+nums[right]>k){
-            right--
-
-        }else if(nums[left]+nums[right]<k){
-            left++
+    for(let i =0;i<nums.length;i++){
+        if(obj[nums[i]]>0){
+            count+=1
+            obj[nums[i]]-=1
+        }else{
+            if(k>nums[i]){
+                if(obj[k-nums[i]]){
+                    obj[k-nums[i]]+=1
+                }else{
+                     obj[k-nums[i]]=1
+                }
+               
+            }
+            
         }
-
-
-
     }
     return count
 };
