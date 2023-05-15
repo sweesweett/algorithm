@@ -4,24 +4,16 @@
  * @return {number[]}
  */
 var nextGreaterElement = function(nums1, nums2) {
-    let idx=0
-    let arr=[]
-    while(idx<nums1.length){
-        arr.push(nums2.indexOf(nums1[idx]))
-        idx++
-    }
-    function isNext(start){
-     for(let i =start+1;i<nums2.length;i++){
-        if(nums2[start]<nums2[i]){
-            return nums2[i]
-         }
-
+    const map = new Map(); 
+    const stack = [];
+    nums2.forEach(el=>{
+        while(stack.length&&stack[stack.length - 1] < el){
+            map.set(stack.pop(),el)
         }
-        return -1
+        stack.push(el)
 
-    }
 
-    
-    return arr.map(el=>isNext(el))
-};
+    })
 
+    return nums1.map(el=>map.has(el)?map.get(el):-1)
+}
