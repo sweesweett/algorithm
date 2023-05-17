@@ -8,7 +8,7 @@ var countStudents = function(students, sandwiches) {
     let num=0
     while(students.length&&sandwiches.length){
         if(num>=students.length){
-            break
+            return num
         }
         if(students[0]===sandwiches[0]){
             students.shift()
