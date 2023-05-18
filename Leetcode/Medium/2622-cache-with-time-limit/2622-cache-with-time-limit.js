@@ -2,7 +2,6 @@
 
 var TimeLimitedCache = function() {
     this.obj={}
-    this.time={}
 };
 
 /** 
@@ -15,13 +14,15 @@ TimeLimitedCache.prototype.set = function(key, value, duration) {
     let dd=true
     if(!this.obj[key]){
         dd=false
+         this.obj[key]={value,time:null}
+    }else{
+         this.obj[key].value=value
     }
-    this.obj[key]=value
-    if(this.time[key]){
-        clearTimeout(this.time[key])
-
+   
+    if(this.obj[key].time){
+        clearTimeout(this.obj[key].time)
     }   
-        this.time[key]=setTimeout(()=>{
+        this.obj[key].time=setTimeout(()=>{
         delete this.obj[key]
 
     },duration)
@@ -36,7 +37,7 @@ TimeLimitedCache.prototype.set = function(key, value, duration) {
  */
 TimeLimitedCache.prototype.get = function(key) {
     if(this.obj[key]){
-        return this.obj[key]
+        return this.obj[key].value
     }else{
         return -1
     }
