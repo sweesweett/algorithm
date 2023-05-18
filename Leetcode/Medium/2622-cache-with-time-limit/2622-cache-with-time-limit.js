@@ -2,6 +2,7 @@
 
 var TimeLimitedCache = function() {
     this.obj={}
+    this.time={}
 };
 
 /** 
@@ -16,19 +17,15 @@ TimeLimitedCache.prototype.set = function(key, value, duration) {
         dd=false
     }
     this.obj[key]=value
-    if(this[`${key}`]){
-        clearTimeout(this[`${key}`])
-        this[`${key}`]=setTimeout(()=>{
+    if(this.time[key]){
+        clearTimeout(this.time[key])
+
+    }   
+        this.time[key]=setTimeout(()=>{
         delete this.obj[key]
 
     },duration)
-    }else{
-    this[`${key}`]=setTimeout(()=>{
-        delete this.obj[key]
 
-    },duration)
-
-    }
  
     return dd
 };
