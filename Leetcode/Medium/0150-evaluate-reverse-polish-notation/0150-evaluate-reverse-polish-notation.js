@@ -17,23 +17,19 @@ var evalRPN = function(tokens) {
 };
  function calculate(value,stack){
         let pop=stack.pop()
+        let pop2=stack.pop()
         switch(value){
             case '+':
-                stack.push(pop+stack.pop())
+                stack.push(pop+pop2)
                 break
             case '-':
-                stack.push(stack.pop()-pop)
+                stack.push(pop2-pop)
                 break
             case '*':
-                stack.push(stack.pop()*pop)
+                stack.push(pop2*pop)
                 break
             case '/':
-                let pop2=stack.pop()
-                if(pop2%pop&&pop2/pop<0){
-                    stack.push(Math.floor(pop2/pop)+1)
-                }else{
-                    stack.push(Math.floor(pop2/pop))
-                }     
+                stack.push(Math.trunc(pop2/pop))     
 
         }
     }
