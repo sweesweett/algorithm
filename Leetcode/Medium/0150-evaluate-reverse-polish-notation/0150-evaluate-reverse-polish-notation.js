@@ -1,11 +1,8 @@
-/**
- * @param {string[]} tokens
- * @return {number}
- */
 var evalRPN = function(tokens) {
     let stack=[]
+    let set =new Set(['+','-','*','/'])
     for(let val of tokens){
-        if(isNaN(Number(val))){
+        if(set.has(val)){
            calculate(val,stack)
             
         }else{
