@@ -6,58 +6,39 @@ var calculate = function(s) {
     let num=''
     let stack=[]
     let set = new Set(['*','/','-','+'])
+    let curr=''
     for(let i=0;i<s.length;i++){
-        if(set.has(s[i])){
-            if(num!==''){
-                stack.push(Number(num))
-            }
-            
-            num=''
-            if(s[i]==='*'||s[i]==='/'){
-                let num=''
-                let idx=i+1
-                while(idx<s.length){
-                    if(set.has(s[idx])){
-                        break
-                    }
-                    num+=s[idx]
-                    idx++
-                }
-                let dd=stack.pop()
-                if(s[i]==='*'){
-                    stack.push(dd*Number(num))
-                }else if(s[i]==='/'){
-                    stack.push(Math.trunc(dd/Number(num)))
-                }
-                i=idx-1
-            }else{
-                stack.push(s[i])
-            }
-          
-
-
-        }else if(s[i]!==''){
-            num+=s[i]
+        if(set.has(s[i])||i===s.length-1){
             if(i===s.length-1){
-                stack.push(Number(num))
+                num+=s[i]
             }
-            
-        }
-    }
-    let stack2=[]
-    for(let i=0;i<stack.length;i++){
-        if(stack[i]==='+'){
-            let dd=stack2.pop()+stack[i+1]
-            stack2.push(dd)
-            i++
-        }else if(stack[i]==='-'){
-             let dd=stack2.pop()-stack[i+1]
-            stack2.push(dd)
-            i++
+            let val=Number(num)
+             if(curr){
+                switch(curr){
+                case '+':
+                stack.push(val)
+                break
+                case '-':
+                  stack.push(-val)
+                break
+                case '*':
+                stack.push(stack.pop()*val)
+                break
+                case '/':
+                stack.push(Math.trunc(stack.pop()/val))
 
+                }
+            }else{
+                stack.push(val)
+            }
+            num=''
+            curr=s[i]
+
+           
+        
         }else{
-            stack2.push(stack[i])
+            num+=s[i]
         }
-    }
-    return stack2[0]
+    }  
+    return stack.reduce((a,b)=>a+b)
 };
