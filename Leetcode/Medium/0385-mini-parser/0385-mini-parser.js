@@ -41,8 +41,40 @@
  * @return {NestedInteger}
  */
 var deserialize = function(s) {
+     let dfs=(str,length=0)=>{
+        let stack=[]
+         let isOpen=false
+         let num=''
+        for(let i=0;i<str.length;i++){
+           if(str[i]==='['&&!isOpen){
+            isOpen=true
+            
+            }else if(str[i]===','){
+            if(num!==''){
+                stack.push(Number(num))
+                num=''
+            }
+            }else if(str[i]==='['&&isOpen){
+                let [val,idx]=dfs(str.slice(i),i)
+                stack.push(val)
+                i+=idx
+                
+            }else if(str[i]===']'&&isOpen){
+                if(num!==''){
+                    stack.push(Number(num))
+                }
+                return [stack,i]
+               
+            }else{
+                num+=str[i]
+            }
+            
+        }
+        return [stack,length]
 
-    let stack=JSON.parse(s)
+    }
+    let stack=[...dfs(s)[0]]
+
     if(Number.isInteger(Number(s))){
         return new NestedInteger(s)
     }
