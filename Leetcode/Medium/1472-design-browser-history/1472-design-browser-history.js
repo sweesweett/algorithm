@@ -2,9 +2,9 @@
  * @param {string} homepage
  */
 var BrowserHistory = function(homepage) {
-    this.stack=[]
-    this.forw=[]
-    this.curr=homepage
+    this.stack=[homepage]
+    this.idx=0
+    
 };
 
 /** 
@@ -12,9 +12,11 @@ var BrowserHistory = function(homepage) {
  * @return {void}
  */
 BrowserHistory.prototype.visit = function(url) {
-    this.stack.push(this.curr)
-    this.curr=url
-    this.forw=[]
+    if(this.idx!==this.stack.length-1){
+        this.stack=this.stack.slice(0,this.idx+1)
+    }
+    this.stack.push(url)
+    this.idx=this.idx+1
     
 };
 
@@ -23,13 +25,13 @@ BrowserHistory.prototype.visit = function(url) {
  * @return {string}
  */
 BrowserHistory.prototype.back = function(steps) {
-     for(let i=1;i<=steps;i++){
-          if(this.stack.length){
-    this.forw.push(this.curr)
-    this.curr=this.stack.pop()
-          }
-     }
-    return this.curr
+    for(let i=1;i<=steps;i++){
+        if(this.idx===0){
+            return this.stack[this.idx]
+        }
+        this.idx=this.idx-1
+    }
+    return this.stack[this.idx]
     
 };
 
@@ -39,12 +41,12 @@ BrowserHistory.prototype.back = function(steps) {
  */
 BrowserHistory.prototype.forward = function(steps) {
     for(let i=1;i<=steps;i++){
-    if(this.forw.length){
-    this.stack.push(this.curr)
-    this.curr=this.forw.pop()
+        if(this.idx===this.stack.length-1){
+            return this.stack[this.idx]
+        }
+        this.idx=this.idx+1
     }
-    }
-    return this.curr
+    return this.stack[this.idx]
 
 };
 
