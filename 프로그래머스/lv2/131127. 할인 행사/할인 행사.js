@@ -15,9 +15,7 @@ function solution(want, number, discount) {
 
     for(let i=10;i<discount.length;i++){
 
-         if(arr.join('')==='0'.repeat(arr.length)){
-          answer++   
-         }
+       
         if(discount[i-10]!==discount[i]){
      
                 if( arr[obj[discount[i]]]!==undefined){
@@ -29,7 +27,9 @@ function solution(want, number, discount) {
 
             
         }
-   
+        if(arr.join('')==='0'.repeat(arr.length)){
+          answer++   
+         }
     }
     return answer
 }
