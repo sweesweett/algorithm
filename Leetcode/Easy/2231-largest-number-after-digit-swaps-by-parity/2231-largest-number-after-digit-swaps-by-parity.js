@@ -7,28 +7,23 @@ var largestInteger = function(num) {
         return num
     }
     let arr= [...String(num)].map(Number)
+    let prOdd= new MaxPriorityQueue()
+    let prEven= new MaxPriorityQueue()
     for(let i=0;i<arr.length;i++){
-        let idx=i+1
-        let max=-Infinity
-        while(idx<arr.length){
-            if(arr[i]%2===arr[idx]%2){
-                if(max===-Infinity||arr[max]<arr[idx]){
-                     max=idx
-                }
-               
-            }
-            idx++
-        }
-        if(max===-Infinity){
-            continue
-        }
-        if(arr[i]<arr[max]){
-            let tmp=arr[i]
-            arr[i]=arr[max]
-            arr[max]=tmp
-        }
-        
+     if(arr[i]%2===0){
+         prEven.enqueue(arr[i])
+     }else{
+         prOdd.enqueue(arr[i])
+     }
 
     }
-   return arr.join('')
+     for(let i=0;i<arr.length;i++){
+     if(arr[i]%2===0){
+         arr[i]=prEven.dequeue().priority
+     }else{
+         arr[i]=prOdd.dequeue().priority
+     }
+
+    }
+    return arr.join('')
 };
