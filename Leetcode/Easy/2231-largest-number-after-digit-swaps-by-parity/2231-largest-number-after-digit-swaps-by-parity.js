@@ -7,8 +7,6 @@ var largestInteger = function(num) {
         return num
     }
     let arr= [...String(num)].map(Number)
-    let pr = new MaxPriorityQueue()
-    pr.enqueue(num)
     for(let i=0;i<arr.length;i++){
         let idx=i+1
         let max=-Infinity
@@ -28,10 +26,9 @@ var largestInteger = function(num) {
             let tmp=arr[i]
             arr[i]=arr[max]
             arr[max]=tmp
-            pr.enqueue(arr.join(''))
         }
         
 
     }
-   return pr.front().priority
+   return arr.join('')
 };
