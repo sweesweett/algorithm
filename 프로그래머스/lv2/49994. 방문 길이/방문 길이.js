@@ -12,7 +12,7 @@ function solution(dirs) {
     let count=0
     
     for(let i =0;i<dirs.length;i++){
-        let dirr=[...dir]
+        let dirr=dir.join('')
         if(dirs[i]==='L'){
             getdir(dir,-1,0)
         }else if(dirs[i]==='U'){
@@ -23,12 +23,13 @@ function solution(dirs) {
         }else{
             getdir(dir,1,0)
         }
-        if(dir.join('')===dirr.join('')){
+        let curr= dir.join('')
+        if(curr===dirr){
             continue
         }
-        if(!set.has(dir.join('')+dirr.join(''))&&!set.has(dirr.join('')+dir.join(''))){
-            set.add(dir.join('')+dirr.join(''))
-            set.add(dirr.join('')+dir.join(''))
+        if(!set.has(dirr+curr)&&!set.has(curr+dirr)){
+            set.add(dirr+curr)
+            set.add(curr+dirr)
             count++
         }
 
