@@ -1,5 +1,5 @@
 function solution(n, m, section) {
-    let idx=0
+    let idx=1
     let left=0
     let count=0
     while(left<section.length){
@@ -8,6 +8,7 @@ function solution(n, m, section) {
         }else{
             count++
             left=idx
+            idx++
         }
         
     }
