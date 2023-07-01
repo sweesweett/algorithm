@@ -20,37 +20,25 @@ var leastInterval = function(tasks, n) {
     map.forEach((val,key)=>{
         pr.enqueue(key,val)
     })
-    let obj={}
     while(pr.size()>0){
         
         let arr=[]
         let count=0
         while(count<=n&&pr.size()>0){
            let {element,priority}=pr.dequeue()
-
-          if(obj[element]>0){
- 
-              arr.push({element,priority})
-
-          }  
-          else{
             if(priority-1>0){
                 arr.push({element,priority:priority-1})
-                obj[element]=1
             }
             count++
         }
-        }
-
-        if(Object.keys(obj).length){
+        if(arr.length){
              ans+=n+1
         }else{
             ans+=count
         }
         arr.forEach(({element,priority})=>{
             pr.enqueue(element,priority)
-            delete obj[element]
-            })
+        })
     }
     return ans
 };
