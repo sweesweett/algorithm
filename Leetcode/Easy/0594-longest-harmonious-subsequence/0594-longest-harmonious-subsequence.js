@@ -14,24 +14,15 @@ var findLHS = function(nums) {
             map.set(el,1)
         }
     })
-    if(map.size===1){
-        return 0
-    }
-    while(idx<nums.length){
-         let start=nums[idx]
-        let plus= !map.has(start+1)?0:map.get(start+1)
-        let minus=!map.has(start-1)?0:map.get(start-1)
+    map.forEach((value,key)=>{
+        let plus= !map.has(key+1)?0:map.get(key+1)
+        let minus=!map.has(key-1)?0:map.get(key-1)
         let dd= Math.max(plus,minus)
-        if(dd>0){
-            dd+=map.get(start)
+         if(dd>0){
+             count=Math.max(dd+value,count)
         }
-        if(dd>count){
-            count=dd
-        }
-        map.set(start,map.get(start)-1)
-        idx++
-
-    }
+       
+    })
     return count
   
   };
