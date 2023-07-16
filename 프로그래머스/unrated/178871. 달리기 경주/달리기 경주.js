@@ -1,17 +1,17 @@
 function solution(players, callings) {
-    let map= new Map()
+    let map={}
     players.forEach((el,idx)=>{
-        map.set(el,idx)
+        map[el]=idx
         
     })
     callings.forEach(el=>{
-        let callIdx= map.get(el)
+        let callIdx= map[el]
         let tmp= players[callIdx]
         if(callIdx>0){
          players[callIdx]=players[callIdx-1]
          players[callIdx-1]=tmp
-        map.set(el,callIdx-1)
-        map.set(players[callIdx],callIdx)
+        map[el]=callIdx-1
+        map[players[callIdx]]=callIdx
         }
     })
     return players
