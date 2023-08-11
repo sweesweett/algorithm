@@ -4,20 +4,20 @@
  */
 var permute = function(nums) {
     let answer=[]
-    let ddd=(arr,set)=>{
+    let ddd=(set)=>{
         if(set.size===nums.length){
-            answer.push(arr)
+            answer.push([...set])
             return;
         }
         for(let val of nums){
             
             if(!set.has(val)){
-               ddd([...arr,val],new Set([...set,val]))
+               ddd(new Set([...set,val]))
             }
 
         }
     }
-    ddd([],new Set())
+    ddd(new Set())
     return answer
 
 };
