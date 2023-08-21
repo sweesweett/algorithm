@@ -4,20 +4,24 @@
  * @return {number[][]}
  */
 var combinationSum = function(candidates, target) {
-    let map= new Map()
+    const ans=[]
+    candidates.sort((a,b)=>a-b)
     let dddd=(sum,arr)=>{
-        if(sum>target){
-            return;
-        }
         if(sum===target){
-            map.set(arr.sort().join(','),arr)
+            ans.push(arr)
             return;
         }
-        for(let val of candidates){
-            dddd(sum+val,[...arr,val])
+        for(let i=0;i<candidates.length;i++){
+            if(sum+candidates[i]>target){
+                return;
+            }
+            if(candidates[i]<arr.at(-1)){
+               continue
+            }
+            dddd(sum+candidates[i],[...arr,candidates[i]])
         }
         return;
     }
     dddd(0,[])
-    return [...map.values()]
+    return ans
 };
