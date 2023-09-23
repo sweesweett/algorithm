@@ -6,16 +6,16 @@
  */
 var findTheDistanceValue = function(arr1, arr2, d) {
     arr2.sort((a,b)=>a-b)
-    let count=0
-    for(let val of arr1){
+    return arr1.filter((val)=>binary(val)).length
+
+
+    function binary(val){
         let left=0
         let right=arr2.length-1
-        let isTrue=true
         while(left<=right){
             let middle = Math.floor((left+right)/2)
             if(Math.abs(arr2[middle]-val)<=d){
-                isTrue= false
-                break
+                return false
             }
             if(arr2[middle]>val){
                 right=middle-1
@@ -24,11 +24,6 @@ var findTheDistanceValue = function(arr1, arr2, d) {
                 left= middle+1
             }
         }
-        if(isTrue){
-            count++
-        }
-            
+        return true
     }
-    return count
-   
 };
