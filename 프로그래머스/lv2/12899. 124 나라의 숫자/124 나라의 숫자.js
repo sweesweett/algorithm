@@ -1,10 +1,6 @@
 function solution(n) {
-    let answer=''
     let map =new Map([[0,4],[1,1],[2,2]])
     let map2 = new Map([[0,''],[1,'1'],[2,'2'],[3,'4']])
-    // for(let i=4;i<=n/2;i++){
-    //    getNewNumber(map,map2,i)
-    // }
     getNewNumber(map,map2,n)
     return map2.get(n)
 
