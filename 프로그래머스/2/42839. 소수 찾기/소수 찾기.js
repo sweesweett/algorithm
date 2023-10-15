@@ -16,10 +16,8 @@ function solution(numbers) {
 
     let recursion=(n,visitedSet)=>{
         let num= Number(n)
-        // if(set.has(num)){
-        //     return;
-        // }
-        if(num>=2&&num<=3){
+
+        if(num===2||num===3){
             set.add(num)
         }
         if(num%2&&num%3){
@@ -44,15 +42,14 @@ function solution(numbers) {
         
     }
     recursion('',new Set())
-    console.log(set)
     if(set.size===0){
         return 0
     }
-    let ans=[]
+    let ans=0
     for(let val of set){
         if(getPrime(val)){
-            ans.push(val)
+            ans++
         }
     }
-    return ans.length
+    return ans
 }
