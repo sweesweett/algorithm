@@ -12,9 +12,6 @@ function solution(maps) {
         if(prev&&prevVal===-1){
             return;
         }
-        if(prev===-1){
-            return;
-        }
         if(prevVal===1){
              sum+=val
            mapArr[x][y]='O'
