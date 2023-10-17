@@ -8,17 +8,13 @@ function solution(maps) {
             return;
         }
         let val= Number(mapArr[x][y])
-   
-        if(prev===1&&isNaN(val)){
+         let prevVal=isNaN(val)?-1:1
+        if(prev&&prevVal===-1){
             return;
         }
         if(prev===-1){
-            return
+            return;
         }
-        let prevVal=isNaN(val)?-1:1
-         if(prev&&prevVal===-1){
-             return;
-         }
         if(prevVal===1){
              sum+=val
            mapArr[x][y]='O'
@@ -43,8 +39,10 @@ function solution(maps) {
             }
         }
     }
-    if(answer.length){
-        return answer.sort((a,b)=>a-b)
+    if(!answer.length){
+         return [-1]
+
     }
-    return [-1]
+    return answer.sort((a,b)=>a-b)
+   
 }
