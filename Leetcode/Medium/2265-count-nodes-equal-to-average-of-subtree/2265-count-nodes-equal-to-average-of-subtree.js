@@ -12,35 +12,21 @@
  */
 var averageOfSubtree = function(root) {
     let count=0
-    const dfs=(root,value,length)=>{
-        let l=length
-        let v= value
+    const dfs=(root)=>{
+
         if(!root){
-            return [length,value]
+            return [0,0]
         }
-        if(!root.left&&!root.right){
-            count++
-            return [length+1,value+root.val]
-        }
-        if(root.left){
-            let [leng,val]=dfs(root.left,length,value)
-            l+=leng
-            v+=val
-            
-        }
-        if(root.right){
-            let [leng,val]=dfs(root.right,length,value)
-            l+=leng
-            v+=val
-        }
-        l+=1
-        v+=root.val
-        if(Math.floor(v/l)===root.val){
-          
+        let [length,value]=dfs(root.left)
+        let [length2,value2]=dfs(root.right)
+        let currentLength=length+length2+1
+        let currentValue=value+value2+root.val
+        if(Math.floor(currentValue/currentLength)===root.val){
             count++
         }
-        return [l,v]
+
+        return [currentLength,currentValue]
     }
-    dfs(root,0,0)
+    dfs(root)
     return count
 };
