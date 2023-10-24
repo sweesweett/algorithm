@@ -4,34 +4,20 @@
  */
 var islandPerimeter = function(grid) {
     let sum=0
-    const dfs=(x,y,prev)=>{
-        if(x<0||y<0||x>=grid.length||y>=grid[0].length){
-            if(prev){
-                sum+=1
-            }
-            return;
+    const dfs=(x,y)=>{
+        if(x<0||y<0||x>=grid.length||y>=grid[0].length||grid[x][y]===0){
+           return 1
         }
         if(grid[x][y]===-1){
-            return;
+            return 0
         }
-        if(prev&&grid[x][y]===0){
-            sum+=1
-            return;
-        }
-        let val=grid[x][y]
-        if(grid[x][y]===1){
-            grid[x][y]=-1
-        }
-      
-        dfs(x-1,y,val)
-        dfs(x,y-1,val)
-        dfs(x+1,y,val)
-        dfs(x,y+1,val)
+        grid[x][y]=-1
+        return dfs(x-1,y)+dfs(x,y-1)+dfs(x+1,y)+dfs(x,y+1)
     }
     for(let i=0;i<grid.length;i++){
         for(let j=0;j<grid[0].length;j++){
             if(grid[i][j]){
-                dfs(i,j)
+                sum+=dfs(i,j)
                 break
             }
         }
