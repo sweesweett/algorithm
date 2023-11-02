@@ -24,8 +24,7 @@ var findFarmland = function(land) {
     }
     dfs(x,y+1,arr)
     dfs(x+1,y,arr)
-    dfs(x-1,y,arr)
-    dfs(x,y-1,arr)
+   
     
     }
   return ans
