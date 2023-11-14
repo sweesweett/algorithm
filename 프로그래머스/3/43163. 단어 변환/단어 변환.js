@@ -12,7 +12,7 @@ function solution(begin, target, words) {
           min= Math.min(min,total)
           return;
       }
-      if(total===words.length){
+      if(total===words.length-1){
           return;
       }
       for(let i=0;i<words.length;i++){
