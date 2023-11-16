@@ -1,5 +1,5 @@
 function solution(begin, target, words) {
-    let min=words.length
+    let min=words.length+1
     let set= new Set(words)
     if(!set.has(target)){
         return 0
@@ -26,12 +26,15 @@ function solution(begin, target, words) {
               }
           }
           if(count===1){
+   
               dfs(words[i],total+1)
           }
       }
 
   }
   dfs(begin,0)
- 
+ if(min===words.length+1){
+     return 0
+ }
  return min
 }
