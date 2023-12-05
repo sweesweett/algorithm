@@ -12,19 +12,23 @@
  */
 var averageOfLevels = function(root) {
     const ans=[]
-    const dfs=(root,level)=>{
-        if(!root){
-            return;
+    let queue=[root]
+    while(queue.length){
+        let q2=[]
+        let count=0
+        let val=0
+        for(let q of queue){
+            if(q===null){
+                continue
+            }
+            val+=q.val
+            count++
+            q2.push(q.left,q.right)
         }
-        if(ans[level]===undefined){
-                ans[level]=[root.val]
-        }else{
-                ans[level].push(root.val)
+        if(count>0){
+            ans.push(val/count)
         }
-        dfs(root.left,level+1)
-        dfs(root.right,level+1)
-        
+        queue=q2
     }
-    dfs(root,0)
-    return ans.map(el=>el.reduce((a,b)=>a+b,0)/el.length)
+    return ans
 };
