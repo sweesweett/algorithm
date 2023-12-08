@@ -11,21 +11,28 @@
  * @return {number}
  */
 var maxDepth = function(root) {
-    let max=0
-    const dfs=(root,count)=>{
-        if(!root){
-            return;
-        }
-      
-        if(!root.children.length){
-            max=Math.max(count+1,max)
-            return;
-        }
-        
-        for(let val of root.children){
-            dfs(val,count+1)
-        }
+    if(!root){
+        return 0
     }
-    dfs(root,0)
-    return max
+    let queue=[root]
+    let depth=1
+    while(queue.length){
+        let queue2=[]
+        for(let q of queue){
+            if(q===null){
+                continue
+            }
+            let {children}=q
+            if(children.length){
+                 queue2.push(...children)
+            }
+           
+        }
+        if(queue2.length){
+             depth++
+        }
+       
+        queue=queue2
+    }
+    return depth
 };
