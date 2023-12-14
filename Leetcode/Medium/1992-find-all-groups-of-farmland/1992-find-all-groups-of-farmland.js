@@ -7,25 +7,40 @@ var findFarmland = function(land) {
     for(let i=0;i<land.length;i++){
       for(let j=0;j<land[0].length;j++){
         if(land[i][j]===1){
-          let arr=[[i,j]]
-          dfs(i,j,arr)
-          ans.push([...arr[0],...arr.at(-1)])
+          land[i][j]===0
+          ans.push([i,j,...bfs(i,j,land)])
+
         }
       }
     }
-    function dfs(x,y,arr){
-    if(x<0||y<0||x>=land.length||y>=land[0].length||land[x][y]===0){
-       return;
+    return ans
+}
+    function bfs(i,j,land){
+        let arr=[[i,j]]
+        let stack=[[i,j]]
+        let row=land.length-1,col=land[0].length
+        let direction=[[0,1],[1,0],[0,-1],[-1,0]]
+        while(stack.length){
+        let [q,w]=stack.pop()
+        for(let [dx,dy] of direction){
+            let x= q+dx
+            let y=w+dy
+            if(x<0||y<0||x>row||y>col){
+                continue
+            }
+            if(land[x][y]){
+               land[x][y]=0
+               stack.push([x,y])
+               let [l,r]=arr.at(-1)
+               if(l<x||r<y){
+                   arr.push([x,y])
+               }
+            }
+  
+
+        }
+        }
+
+        return arr.at(-1)
+
     }
-    land[x][y]=0
-    let [i,j]=arr.at(-1)
-    if(x>i||y>j){
-      arr.push([x,y])
-    }
-    dfs(x,y+1,arr)
-    dfs(x+1,y,arr)
-   
-    
-    }
-  return ans
-};
