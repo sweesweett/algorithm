@@ -11,19 +11,25 @@
  * @return {ListNode}
  */
 var mergeTwoLists = function(list1, list2) {
-    let list3 = new ListNode(-1)
-    let dd=list3
-    while(list1!==null&&list2!==null){
-        if(list1.val<=list2.val){
-            dd.next=list1
-            list1=list1.next
-        }else{
-            dd.next=list2
-            list2=list2.next
-
-        }
-        dd=dd.next
-    }
-    dd.next = (list1==null)?list2:list1;
+    let list3 = new ListNode()
+    recursion(list1,list2,list3)
     return list3.next
 };
+
+    const recursion=(l1,l2,newList)=>{
+        if(!(l1&&l2)){
+            newList.next=!l1?l2:l1
+        
+            return 
+        }
+        if(l1.val<=l2.val){
+            newList.next=l1
+            l1=l1.next
+        }else{
+            newList.next=l2
+            l2=l2.next
+        }
+        newList=newList.next
+        return recursion(l1,l2,newList)
+    }
+    
