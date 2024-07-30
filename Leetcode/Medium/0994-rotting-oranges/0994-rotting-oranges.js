@@ -5,11 +5,11 @@ var orangesRotting = function(grid) {
     let set= new Set()
     let total=0
     let stack=[]
-    let rotten;
+
     for(let i=0;i<grid.length;i++){
         for(let j=0;j<grid[0].length;j++){
             if(grid[i][j]===2){
-                rotten=true
+
                 stack.push([[i,j],0])
                 visited[i][j]=true
             }
