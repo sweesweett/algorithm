@@ -1,6 +1,5 @@
 function solution(user_id, banned_id) {
     let regArr= []
-    let count=0
     let validReg=0
     let bannedSet=new Set()
     for(let val of banned_id){
@@ -40,14 +39,13 @@ function solution(user_id, banned_id) {
         }
     }
     recursion(0,new Set())
-    return count
+    return bannedSet.size
    function recursion(idx,set){
        
        if(idx>=totalArr.length){
            if(set.size===validReg){
                 let str=[...set].sort().join(' ')
                 if(!bannedSet.has(str)){
-                    count++
                     bannedSet.add(str)
                 }
 
