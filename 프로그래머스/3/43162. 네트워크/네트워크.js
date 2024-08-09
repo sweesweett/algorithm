@@ -1,28 +1,28 @@
 function solution(n, computers) {
     let count=0
-    const dfs=(x,y)=>{
-        for(let i=0;i<computers[0].length;i++){
-            if(i===x||i===y){
-                computers[x][i]=0
-                continue
+    let visited=new Array(n).fill(false)
+    const dfs=(idx)=>{
+        if(visited[idx]){
+            return
+        }
+        visited[idx]=true
+        for(let i=0;i<computers[idx].length;i++){
+            if(computers[idx][i]&&!visited[i]){
+                dfs(i)
+    
             }
-            if(computers[x][i]===1){
+            
+        }
 
-                 computers[x][i]=0
-                 computers[i][x]=0
-                 dfs(i,x)
-            }
+    }
+    for(let i=0;i<n;i++){
+        computers[i][i]=0
+    }
+    for(let i=0;i<n;i++){
+        if(!visited[i]){
+            dfs(i)
+            count++
         }
     }
-    for(let i=0;i<computers.length;i++){
-        for(let j=0;j<computers[0].length;j++){
-            if(computers[i][j]){
-    
-                dfs(i,j)
-                count++
-            }
-        }
-    }
-    
-   return count
+    return count
     }
