@@ -8,7 +8,8 @@ function solution(orders, course) {
         maxVal=Math.max(num,maxVal)
     }
     for(let val of orders){
-      recursion(0,[],val)     
+        let newVal=val.split('').sort().join('')
+      recursion(0,[],newVal)     
     }
     for(let key in obj2){
         obj2[key].sort((a,b)=>obj[b]-obj[a])
@@ -40,7 +41,7 @@ function solution(orders, course) {
     }
     for(let i=idx;i<origin.length;i++){
 
-        let newArr=[...arr,origin[i]].sort()
+        let newArr=[...arr,origin[i]]
         let join=newArr.join('')
         
       if(newArr.length>=2){
@@ -51,8 +52,6 @@ function solution(orders, course) {
          }
           obj[join]+=1   
         }  
-        
-            
       }
 
         recursion(i+1,[...arr,origin[i]],origin)
