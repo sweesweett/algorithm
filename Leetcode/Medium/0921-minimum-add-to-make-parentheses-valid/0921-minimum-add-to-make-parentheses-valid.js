@@ -3,18 +3,28 @@
  * @return {number}
  */
 var minAddToMakeValid = function(s) {
+    let arr=[...s]
     let stack=[]
-    let idx=0
-    while(idx<s.length){
+    while(true){
+    let isremoved=false
+    for(let i=0;i<arr.length;i++){
         if(!stack.length){
-            stack.push(s[idx])
+            stack.push(arr[i])
+            continue
         }
-        else if(stack.at(-1)==='('&&s[idx]===')'){
+        if(stack.at(-1)+arr[i]==='()'){
             stack.pop()
+            isremoved=true
         }else{
-            stack.push(s[idx])
+            stack.push(arr[i])
         }
-        idx++
     }
-    return stack.length
+    arr=[...stack]
+    stack=[]
+    if(!isremoved){
+        break
+    }
+ 
+    }
+    return arr.length
 };
