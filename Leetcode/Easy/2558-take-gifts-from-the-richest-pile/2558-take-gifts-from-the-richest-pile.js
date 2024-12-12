@@ -3,18 +3,37 @@
  * @param {number} k
  * @return {number}
  */
+class APriorityQueue{
+    constructor(arr){
+        this.queue=[]
+        
+    }
+    init(arr){
+        this.queue=[...arr]
+        this.sort()
+    }
+    push(val){
+        this.queue.push(val)
+        this.sort()
+    }
+    sort(){
+        this.queue.sort((a,b)=>b-a)
+    }
+    shift(){
+        return this.queue.shift()
+    }
+    sum(){
+        return this.queue.reduce((a,b)=>a+b,0)
+    }
+}
+
+
 var pickGifts = function(gifts, k) {
-    let pr = new MaxPriorityQueue()
-    let sum=0
-    for(let i=0;i<gifts.length;i++){
-            pr.enqueue(gifts[i])
-    }
-    while(k>0){
-        pr.enqueue(Math.floor(Math.sqrt(pr.dequeue().priority)))
-        k--
-    }
-    while(pr.size()>0){
-        sum+=pr.dequeue().priority
-    }
-    return sum
+   let priority=new APriorityQueue()
+   priority.init(gifts)
+   for(let i=0;i<k;i++){
+       priority.push(Math.floor(priority.shift()**0.5)) 
+
+   }
+   return priority.sum()
 };
