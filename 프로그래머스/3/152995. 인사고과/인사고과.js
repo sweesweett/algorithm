@@ -1,17 +1,17 @@
 function solution(scores) {
     var answer = 0;
-    let arr=Array.from({length:scores.length},(_,i)=>[...scores[i],i])
-    arr.sort((a,b)=>{
+    let me=scores[0]
+    scores.sort((a,b)=>{
         return (b[0]+b[1])-(a[0]+a[1])
     })
     let minus=0
     let rank=1
     let prev=null
-    for(let i=0;i<arr.length;i++){
+    for(let i=0;i<scores.length;i++){
         let isValid=true
         for(let j=0;j<i;j++){
-          if(arr[j][0]>arr[i][0]&&arr[j][1]>arr[i][1]){
-              if(arr[i][2]===0){
+          if(scores[j][0]>scores[i][0]&&scores[j][1]>scores[i][1]){
+              if(scores[i][0]===me[0]&&scores[i][1]===me[1]){
                   return -1
               }
               isValid=false
@@ -23,14 +23,14 @@ function solution(scores) {
             continue
         }
         if(prev===null){
-            prev=arr[i][0]+arr[i][1]
+            prev=scores[i][0]+scores[i][1]
         }
-        if(prev!==arr[i][0]+arr[i][1]){
+        if(prev!==scores[i][0]+scores[i][1]){
             rank=i+1-minus
         }
-        if(arr[i][2]===0){
-            return rank
-        }
+       if(scores[i][0]===me[0]&&scores[i][1]===me[1]){
+                  return rank
+       }
         
     }
 
